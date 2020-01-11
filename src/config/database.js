@@ -12,7 +12,6 @@ const connect = async () => {
     mongoose.set('useCreateIndex', true);
     mongoose.set('useUnifiedTopology', true);
     try {
-        console.log(process.env.MONGODB_URI)
         await mongoose.connect(process.env.MONGODB_URI);
     } catch (e) {
         console.log("error connecting with database");
