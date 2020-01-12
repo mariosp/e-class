@@ -1,5 +1,5 @@
 const mongoose= require('mongoose');
-const userSchema=mongoose.Schema({
+const userSchema= mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -16,8 +16,6 @@ const userSchema=mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minlength: 5,
-        maxlength: 50
     },
     userRole: {
         type: String,
@@ -29,11 +27,11 @@ const userSchema=mongoose.Schema({
         ]
     },
     student: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Student"
     },
     teacher: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Teacher"
     },
     accessTokens:[
