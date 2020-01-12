@@ -1,11 +1,12 @@
 const router = require("express").Router();
 const userController = require("../controllers/user");
-const {checkAuthToken} = require("../middleware/auth");
+const {checkAuthToken, routePermission} = require("../middleware/auth");
+const {userRoles} = require("../services/user.service");
 
 //asd
-router.get('/', userController.getUser);
+router.get('/',checkAuthToken,  routePermission([userRoles.admin,userRoles.student,userRoles.teacher]), userController.getUser);
 
-router.post('/create', checkAuthToken, userController.createUser);
+router.post('/create', checkAuthToken, routePermission([userRoles.admin]), userController.createUser);
 
 // router.patch('/', userController.createUser);
 

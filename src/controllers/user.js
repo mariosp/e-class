@@ -1,8 +1,12 @@
 const {User, Student, Teacher} = require("../models");
 const {hashPassword} = require("../services/password.service");
+const {userRoles} = require("../services/user.service");
 
 exports.getUser = (req, res) => {
-    res.send('NOT IMPLEMENTED: getUser');
+    let user = req.user;
+    user?
+        res.send({status:1,data: user}) :
+        res.status(500).send({status:0,msg: "error getting your info"});
 };
 
 exports.createUser = async (req, res) => {
@@ -10,11 +14,11 @@ exports.createUser = async (req, res) => {
     const password = await hashPassword(req.body.password);
     const user = new User({...req.body, password});
     switch (user.userRole) {
-        case "student":
+        case userRoles.student:
             userRole = new Student({user: user._id});
             user.student = userRole._id;
             break;
-        case "teacher":
+        case userRoles.teacher:
             userRole = new Teacher({user: user._id});
             user.teacher = userRole._id;
             break;
@@ -23,14 +27,11 @@ exports.createUser = async (req, res) => {
     try{
         await user.save();
         await userRole.save();
+        res.send({status:1,msg:`User ${user.name} created`});
     } catch (e) {
       console.log(e);
-      res.status(500);
-      res.send("Error creating user");
+      res.status(500).send({errors:"Error creating user"});
     }
-
-
-    res.send(`User ${user.name} created`);
 };
 
 exports.updateUser = (req, res) => {

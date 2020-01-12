@@ -48,9 +48,10 @@ const userSchema= mongoose.Schema({
  * Override default toJSON, remove password field and __v version
  */
 userSchema.methods.toJSON = function() {
-    var obj = this.toObject();
+    let obj = this.toObject();
     delete obj.password;
     delete obj.__v;
+    delete obj.accessTokens;
     obj.id = obj._id;
     delete obj._id;
     return obj;
