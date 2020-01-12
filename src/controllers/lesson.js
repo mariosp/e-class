@@ -34,3 +34,22 @@ exports.createLesson = async (req, res) => {
     }
 };
 
+exports.enrollStudent = async (req, res) => {
+    const {student,lesson} = req.body;
+    let lessonResult,studentResult;
+    try{
+        if(!student || !lesson){return res.status(400).send({status:0,msg:"Please check payload"})}
+        const studentObject = await Student.findById(student);
+        if(!studentObject){return res.status(400).send({status:0,msg:"Student not found"});}
+        lessonResult = await Lesson.findByIdAndUpdate(lesson,{ $addToSet: { enrolledStudents: studentObject._id }},{new: true});
+        studentResult = await Student.findOneAndUpdate({_id:studentObject._id,'courses.lesson':{'$ne':lessonResult._id}}, { $push: { courses: {lesson:lessonResult._id} }}, {new:true});
+        if(!studentResult){ return res.status(400).send({status:0,msg:"Student is already enrolled"});}
+
+        res.send({status:1,msg:"Student has been enrolled"});
+    } catch (e) {
+        console.log(e);
+        res.status(400).send({status:0,msg:"Error enrolling student to lesson"});
+
+    }
+};
+

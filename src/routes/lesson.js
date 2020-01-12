@@ -8,6 +8,8 @@ router.get('/',checkAuthToken,  routePermission([userRoles.admin,userRoles.stude
 
 router.post('/create', checkAuthToken, routePermission([userRoles.admin]), lessonController.createLesson);
 
+router.post('/enroll', checkAuthToken, routePermission([userRoles.admin]), lessonController.enrollStudent);
+
 
 
 module.exports = router;
