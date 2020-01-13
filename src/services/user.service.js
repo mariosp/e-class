@@ -6,7 +6,6 @@ const userRoles = {
     admin: "admin"
 };
 
-
 module.exports = {
     userRoles
 };

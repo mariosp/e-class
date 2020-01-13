@@ -1,5 +1,4 @@
 const {User, Student, Teacher, Lesson} = require("../models");
-const {hashPassword} = require("../services/password.service");
 const {userRoles} = require("../services/user.service");
 
 
@@ -40,9 +39,11 @@ exports.enrollStudent = async (req, res) => {
     try{
         if(!student || !lesson){return res.status(400).send({status:0,msg:"Please check payload"})}
         const studentObject = await Student.findById(student);
+        console.log(studentObject)
         if(!studentObject){return res.status(400).send({status:0,msg:"Student not found"});}
-        lessonResult = await Lesson.findByIdAndUpdate(lesson,{ $addToSet: { enrolledStudents: studentObject._id }},{new: true});
-        studentResult = await Student.findOneAndUpdate({_id:studentObject._id,'courses.lesson':{'$ne':lessonResult._id}}, { $push: { courses: {lesson:lessonResult._id} }}, {new:true});
+        const lessonResult = await Lesson.findByIdAndUpdate(lesson,{ $addToSet: { enrolledStudents: studentObject._id }});
+        if(!lessonResult){ return res.status(400).send({status:0,msg:"Student is already enrolled"});}
+        studentResult = await Student.findOneAndUpdate({_id:studentObject._id,'courses.lesson':{'$ne':lesson}}, { $push: { courses: {lesson:lesson} }}, {new:true});
         if(!studentResult){ return res.status(400).send({status:0,msg:"Student is already enrolled"});}
 
         res.send({status:1,msg:"Student has been enrolled"});

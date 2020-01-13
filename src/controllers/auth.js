@@ -12,16 +12,16 @@ exports.login = async (req, res) => {
     const {email, password} = req.body;
 
     const user = await User.findOne({email});
-    user || res.status(404).send({errors: "Wrong credentials"});
+    if(!user) return res.status(404).send({errors: "Wrong credentials"});
 
     const validPassword = await comparePassword(password, user.password).catch((err) => console.log(err));
-    validPassword || res.status(404).send({errors: "Wrong credentials"});
+    if(!validPassword) return res.status(404).send({errors: "Wrong credentials"});
     try {
-        const token = createAuthToken(user.id, user.userRole);
-        const updatedUser = await User.findOneAndUpdate(user._id, {accessTokens: user.accessTokens.concat({token})}, {
+        const token = createAuthToken(user._id, user.userRole);
+        const updatedUser = await User.findOneAndUpdate({_id: user._id}, {accessTokens: user.accessTokens.concat({token})}, {
             new: true //return the document after update
         });
-        res.send({
+        return res.send({
             id: updatedUser._id,
             token: token
         });
