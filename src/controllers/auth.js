@@ -27,6 +27,8 @@ exports.login = async (req, res) => {
         });
         return res.send({
             id: updatedUser._id,
+            name: updatedUser.name,
+            email: updatedUser.email,
             token: token
         });
     } catch (e) {
@@ -34,3 +36,24 @@ exports.login = async (req, res) => {
         res.status(500).send({errors: "Server Error"});
     }
 };
+
+/*
+ logout ALL
+ Remove current JWT token
+*/
+exports.logout = async (req, res) => {
+    const user = req.user;
+    const userResult = await User.findOneAndUpdate({_id: req.user.id},{ $pull: { accessTokens: { token: req.token } } });
+    res.send({status:1,msg:"logged out"});
+};
+
+/*
+ logout ALL
+ Remove all accessTokens
+*/
+exports.logoutAll = async (req, res) => {
+    const userResult = await User.findOneAndUpdate({_id: req.user.id},{ accessTokens: [] });
+    res.send({status:1,msg:"logged out from all devices"});
+};
+
+
