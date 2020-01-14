@@ -41,7 +41,6 @@ exports.enrollStudent = async (req, res) => {
     try{
         if(!student || !lesson){return res.status(400).send({status:0,msg:"Please check payload"})}
         const studentObject = await Student.findById(student);
-        console.log(studentObject)
         if(!studentObject){return res.status(400).send({status:0,msg:"Student not found"});}
         const lessonResult = await Lesson.findByIdAndUpdate(lesson,{ $addToSet: { enrolledStudents: studentObject._id }});
         if(!lessonResult){ return res.status(400).send({status:0,msg:"Student is already enrolled"});}
