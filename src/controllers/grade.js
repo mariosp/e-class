@@ -1,5 +1,10 @@
 const {User, Student, Teacher, Lesson, Grade} = require("../models");
 
+/*
+ addGrade TEACHER
+ Add a grade on a student
+ - Teacher can only add grades to the students who are enrolled on his lesson
+*/
 exports.addGrade = async (req, res) => {
     const {grade, student} = req.body;
 

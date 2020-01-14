@@ -1,12 +1,10 @@
 const {User, Student, Teacher, Lesson} = require("../models");
 const {userRoles} = require("../services/user.service");
 
-
-exports.getLesson = (req, res) => {
-    res.send("NOT IMPLEMENTED YET")
-};
-
-
+/*
+ createLesson ADMIN
+ Creates a new lesson
+*/
 exports.createLesson = async (req, res) => {
     let lesson, teacherResult;
     let {title,teacher} = req.body;
@@ -33,6 +31,10 @@ exports.createLesson = async (req, res) => {
     }
 };
 
+/*
+ enrollStudent ADMIN
+ Enroll a student to a lesson
+*/
 exports.enrollStudent = async (req, res) => {
     const {student,lesson} = req.body;
     let lessonResult,studentResult;

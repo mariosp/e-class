@@ -2,6 +2,10 @@ const {User, Student, Teacher} = require("../models");
 const {hashPassword} = require("../services/password.service");
 const {userRoles} = require("../services/user.service");
 
+/*
+ getUser ALL
+ Return user's info
+*/
 exports.getUser = (req, res) => {
     let user = req.user;
     user?
@@ -9,6 +13,10 @@ exports.getUser = (req, res) => {
         res.status(500).send({status:0,msg: "error getting your info"});
 };
 
+/*
+ createUser ADMIN
+ Create a new user
+*/
 exports.createUser = async (req, res) => {
     let userRole;
     const password = await hashPassword(req.body.password);

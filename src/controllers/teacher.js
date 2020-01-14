@@ -1,9 +1,9 @@
 const {User, Student, Teacher, Lesson} = require("../models");
 
 /*
- GetTeacherLesson
+ GetTeacherLesson TEACHER
  Return all teacher's info for the lesson {title, lesson_id, enrolled users}
- -Wont return info that teacher is not permitted to see
+ -Wont return info that teacher is not permitted to see, like other lessons a student is enrolled
 */
 exports.getTeacherLesson = async (req, res) => {
     const user = req.user;
@@ -44,7 +44,7 @@ exports.getTeacherLesson = async (req, res) => {
                 let studentLesson = element.courses.find(value => {
                     if(value.lesson) return value;
                 });
-                studentLesson.user = element.user;
+                studentLesson.user = element.user.name;
                 delete studentLesson.lesson;
                 delete studentLesson.courses;
 

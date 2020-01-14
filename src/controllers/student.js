@@ -1,6 +1,10 @@
 const {User, Student, Teacher, Lesson} = require("../models");
 const {userRoles} = require("../services/user.service");
 
+/*
+ getAllEnrolledLessons STUDENT
+ Return student's lessons that is enrolled
+*/
 exports.getAllEnrolledLessons = async (req, res) => {
     const user = req.user;
     const populateQuery = [

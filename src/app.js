@@ -7,10 +7,6 @@ const routes = require("./routes");
 /* Set enviroment variables from file */
 (process.env.NODE_ENV !== 'production') && enviroment.config({path: path.join(__dirname,"../enviroments/.env.dev")});
 
-// if(process.env.NODE_ENV !== 'production') {
-//     console.log("DEV")
-//     enviroment.config({path: path.join(__dirname,"../enviroments/.env.dev")});
-// }
 
 /* Connect Database */
 mongoDB.connect();
@@ -27,7 +23,7 @@ app.use(routes);
 const port = process.env.PORT || 8080;
 const serverAdress = process.env.SERVER_ADDRESS || 'localhost';
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.get('/', (req, res) => res.send('RESPONSE FROM API /'));
 
 app.listen(port, () => console.log(`Server running on http://${serverAdress}:${port}`));
 
