@@ -37,7 +37,7 @@ exports.getTeacherLesson = async (req, res) => {
         ];
 
         await Lesson.findOne({teacher: user.teacher}).populate(populateQuery).lean().exec((err,lesson)=>{
-            if(!lesson)  return res.status(404).send({status:0,msg:"Error"});
+            if(!lesson)  return res.status(400).send({status:0,msg:"Error"});
 
             const final = lesson.enrolledStudents.map(element => {
 

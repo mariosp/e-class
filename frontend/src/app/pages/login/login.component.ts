@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   async onSubmit(data) {
     console.log(data)
     const login = await this.apiSevice.login(data).toPromise();
+    console.log(login)
     if(login.status === 1){
     console.log(login.msg)
     } else {

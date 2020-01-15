@@ -16,10 +16,10 @@ exports.login = async (req, res) => {
     const {email, password} = req.body;
 
     const user = await User.findOne({email});
-    if(!user) return res.status(404).send({status:0, msg: "Wrong credentials"});
+    if(!user) return res.status(400).send({status:0, msg: "Wrong credentials"});
 
     const validPassword = await comparePassword(password, user.password).catch((err) => console.log(err)); //compare password function using bcrypt compare
-    if(!validPassword) return res.status(404).send({status:0, msg: "Wrong credentials"});
+    if(!validPassword) return res.status(400).send({status:0, msg: "Wrong credentials"});
     try {
         const token = createAuthToken(user._id, user.userRole);
         const updatedUser = await User.findOneAndUpdate({_id: user._id}, {accessTokens: user.accessTokens.concat({token})}, {
@@ -34,7 +34,7 @@ exports.login = async (req, res) => {
         });
     } catch (e) {
         console.log(e);
-        res.status(500).send({status:0, msg: "Server error"});
+        res.status(404).send({status:0, msg: "Server error"});
     }
 };
 
