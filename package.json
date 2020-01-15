@@ -1,0 +1,22 @@
+{
+  "name": "eclass",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "installserver": "cd server && npm i ",
+    "installclient": "cd frontend && npm i "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariosp/eclass-nodejs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mariosp/eclass-nodejs/issues"
+  },
+  "homepage": "https://github.com/mariosp/eclass-nodejs#readme"
+}
