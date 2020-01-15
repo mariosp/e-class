@@ -11,6 +11,6 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   login(data): Observable<any> {
-    return this.http.post(`${environment.server}auth/login` ,data)
+    return this.http.post(`${environment.server}auth/login` ,data);
   }
 }

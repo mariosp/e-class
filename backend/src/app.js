@@ -4,6 +4,7 @@ const path = require('path');
 const mongoDB = require("./config/database");
 const routes = require("./routes");
 const databasefakerroutes = require("./config/generate-data");
+const cors = require('cors');
 
 /* Set enviroment variables from file */
 (process.env.NODE_ENV !== 'production') && enviroment.config({path: path.join(__dirname,"../enviroments/.env.dev")});
@@ -18,6 +19,8 @@ const app = express();
 /* Set middlewares and api routes */
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
+app.options('*', cors());
 
 app.use(routes); //app api
 app.use(databasefakerroutes); // api to generate admin and db data
