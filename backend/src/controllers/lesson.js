@@ -27,7 +27,7 @@ exports.createLesson = async (req, res) => {
         }
         res.send({status:1, msg: "Lesson created",data:lesson});
     } else {
-        res.status(400).send({status:0, msg: "Your need to set a title and teacher"});
+        res.send({status:0, msg: "Your need to set a title and teacher"});
     }
 };
 
@@ -39,18 +39,18 @@ exports.enrollStudent = async (req, res) => {
     const {student,lesson} = req.body;
     let lessonResult,studentResult;
     try{
-        if(!student || !lesson){return res.status(400).send({status:0,msg:"Please check payload"})}
+        if(!student || !lesson){return res.send({status:0,msg:"Please check payload"})}
         const studentObject = await Student.findById(student);
-        if(!studentObject){return res.status(400).send({status:0,msg:"Student not found"});}
+        if(!studentObject){return res.send({status:0,msg:"Student not found"});}
         const lessonResult = await Lesson.findByIdAndUpdate(lesson,{ $addToSet: { enrolledStudents: studentObject._id }});
-        if(!lessonResult){ return res.status(400).send({status:0,msg:"Student is already enrolled"});}
+        if(!lessonResult){ return res.send({status:0,msg:"Student is already enrolled"});}
         studentResult = await Student.findOneAndUpdate({_id:studentObject._id,'courses.lesson':{'$ne':lesson}}, { $push: { courses: {lesson:lesson} }}, {new:true});
-        if(!studentResult){ return res.status(400).send({status:0,msg:"Student is already enrolled"});}
+        if(!studentResult){ return res.send({status:0,msg:"Student is already enrolled"});}
 
         res.send({status:1,msg:"Student has been enrolled"});
     } catch (e) {
         console.log(e);
-        res.status(400).send({status:0,msg:"Error enrolling student to lesson"});
+        res.send({status:0,msg:"Error enrolling student to lesson"});
 
     }
 };

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from "./pages/login/login.component";
+import {HomeComponent} from "./pages/home/home.component";
+import {TokenGuard} from "./pages/services/token.guard";
 
 
 const routes: Routes = [
@@ -8,9 +10,13 @@ const routes: Routes = [
     path: "",
     redirectTo: "",
     pathMatch: "full",
-    component: LoginComponent,
-    canActivate: []
+    component: HomeComponent,
+    canActivate: [TokenGuard]
   },
+  {
+    path: "login",
+    component: LoginComponent
+  }
 
 ];
 

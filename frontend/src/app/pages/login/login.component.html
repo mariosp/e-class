@@ -4,19 +4,19 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
       <p>
         <mat-form-field>
-          <input type="text" matInput placeholder="email" formControlName="email">
+          <input type="text" matInput placeholder="email" formControlName="email" (change)="onChange()">
         </mat-form-field>
       </p>
 
       <p>
         <mat-form-field>
-          <input type="password" matInput placeholder="password" formControlName="password">
+          <input type="password" matInput placeholder="password" formControlName="password" (change)="onChange()">
         </mat-form-field>
       </p>
 
-<!--      <p *ngIf="error" class="error">-->
-<!--        {{ error }}-->
-<!--      </p>-->
+      <p *ngIf="error" class="error">
+        {{ error }}
+      </p>
 
       <div class="button">
         <button type="submit" mat-button [disabled]="!form.valid">Login</button>

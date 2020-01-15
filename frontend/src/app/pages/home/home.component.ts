@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
+import {ApiService} from "../services/api.service";
 
 @Component({
   selector: 'app-home',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  user = {
+    name : '',
+    userRole: undefined
+  };
+  constructor(private nav: Router,private apiService: ApiService) { }
 
-  constructor() { }
+ async ngOnInit() {
+    this.user = JSON.parse(await localStorage.getItem("USER"));
+  }
 
-  ngOnInit() {
+  async logout(){
+    await this.apiService.logout().subscribe();
+    localStorage.removeItem("USER");
+    localStorage.removeItem("TOKEN");
+    this.nav.navigate(['/login']);
+
   }
 
 }

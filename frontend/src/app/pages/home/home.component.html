@@ -1,1 +1,7 @@
-<p>home works!</p>
+<mat-toolbar>
+  <span>Hello {{user.name}}</span>
+  <span class="spacer"></span>
+  <button mat-button color="primary" (click)="logout()">Logout</button>
+</mat-toolbar>
+<app-student *ngIf="user.userRole === 'student'"></app-student>
+<app-teacher *ngIf="user.userRole === 'teacher'"></app-teacher>
