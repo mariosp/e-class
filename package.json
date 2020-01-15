@@ -1,25 +1,24 @@
 {
-  "name": "role-based-api",
+  "name": "eclass",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/app.js"
+    "installserver": "cd server && npm i ",
+    "installclient": "cd frontend && npm i ",
+    "server": "cd backend && npm run dev",
+    "client": "cd frontend && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariosp/eclass-nodejs.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-validator": "^6.3.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.8.6"
+  "bugs": {
+    "url": "https://github.com/mariosp/eclass-nodejs/issues"
   },
-  "devDependencies": {
-    "nodemon": "^2.0.2"
-  }
+  "homepage": "https://github.com/mariosp/eclass-nodejs#readme"
 }

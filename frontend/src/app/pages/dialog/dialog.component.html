@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Submit Grade</h1>
+<div mat-dialog-content>
+  <p>Put the grade for the student</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="grade">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="grade" cdkFocusInitial>Submit</button>
+</div>

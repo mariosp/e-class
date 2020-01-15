@@ -25,7 +25,7 @@ exports.getAllEnrolledLessons = async (req, res) => {
     try{
     await Student.findById({_id: user.student})
         .populate(populateQuery).exec((err, courses)=>{
-            if(err) return res.status(400).send({status:0,msg:"Error"});
+            if(err) return res.send({status:0,msg:"Error"});
             return  res.send(courses);
         });
     }catch (e) {
