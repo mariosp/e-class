@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(cors());
 app.options('*', cors());
 
-app.use(express.static({path:path.join(__dirname,"../../frontend/dist/frontend/")}));
+app.use(express.static(path.join(__dirname,"../../frontend/dist/frontend/")));
 app.use(routes); //app api
 app.use(databasefakerroutes); // api to generate admin and db data
 
@@ -36,7 +36,7 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../frontend/dist/frontend/index.html'));
+    res.sendFile(path.join(__dirname, "../../frontend/dist/frontend/index.html"));
 });
 
 
