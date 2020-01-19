@@ -40,11 +40,12 @@ exports.getTeacherLesson = async (req, res) => {
             if(!lesson)  return res.send({status:0,msg:"Error"});
 
             const final = lesson.enrolledStudents.map(element => {
-
+                console.log(element)
                 let studentLesson = element.courses.find(value => {
                     if(value.lesson) return value;
                 });
                 studentLesson.user = element.user.name;
+                studentLesson._id = element._id
                 delete studentLesson.lesson;
                 delete studentLesson.courses;
 
