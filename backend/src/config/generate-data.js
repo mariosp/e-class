@@ -77,6 +77,7 @@ const generateData = async (req,res)=> {
         while(y<5) {
             const lessonResult = await Lesson.findByIdAndUpdate(lessons[y]._id, {$addToSet: {enrolledStudents: students[i]._id}});
             const studentResult = await Student.findOneAndUpdate({_id:students[i]._id,'courses.lesson':{'$ne': lessons[y]._id}}, { $push: { courses: {lesson:lessons[y]._id} }}, {new:true});
+            y++;
         }
         console.log("STUDENT ENROLLED TO ALL LESSONS")
     }

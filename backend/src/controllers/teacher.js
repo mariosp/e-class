@@ -45,6 +45,7 @@ exports.getTeacherLesson = async (req, res) => {
                     if(value.lesson) return value;
                 });
                 studentLesson.user = element.user.name;
+                studentLesson._id = element._id
                 delete studentLesson.lesson;
                 delete studentLesson.courses;
 

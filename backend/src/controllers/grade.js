@@ -11,8 +11,8 @@ exports.addGrade = async (req, res) => {
     try {
         const teacher = await Teacher.findOne({_id: req.user.teacher});
         if (!teacher) return res.send({status: 0, msg: "Not Found"});
-        const lesson = await Lesson.findOne({_id: teacher.lesson, enrolledStudents: student}); // Check if teacher role can edit this student by checking if student is enrolled on lesson
-        if (!lesson) return res.send({status: 0, msg: "not permitted to add grade on this student"});
+        const lesson = await Lesson.findOne({_id:teacher.lesson, enrolledStudents: student}); // Check if teacher role can edit this student by checking if student is enrolled on lesson
+         if (!lesson) return res.send({status: 0, msg: "not permitted to add grade on this student"});
         const gradeResult = await new Grade({
             student,
             grade,
@@ -20,7 +20,6 @@ exports.addGrade = async (req, res) => {
         });
         await gradeResult.save();
         const studentResult = await Student.updateOne({_id: student,'courses.lesson':lesson._id},{ $set: { "courses.$.grade" : gradeResult._id } }, {new:true});
-        console.log(studentResult);
         res.send({status:1,msg:"Grade updated"});
     } catch (e) {
         console.log(e);
