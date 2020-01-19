@@ -9,7 +9,8 @@
     "installclient": "cd frontend && npm i ",
     "server": "cd backend && npm run start",
     "client": "cd frontend && npm start",
-    "heroku-postbuild": "cd frontend && ng build --prod "
+    "start": "cd backend && node src/app.js",
+    "heroku-postbuild": "cd frontend && npm i && ng build --prod && cd ../backend"
   },
   "repository": {
     "type": "git",
