@@ -10,7 +10,7 @@
     "server": "cd backend && npm run start",
     "client": "cd frontend && npm start",
     "start": "cd backend && node src/app.js",
-    "postinstall": "npm install --prefix backend && npm install --prefix frontend && npm run build --prod --prefix frontend "
+    "postinstall": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend "
   },
   "repository": {
     "type": "git",
