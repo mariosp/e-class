@@ -8,9 +8,9 @@ import {TokenGuard} from "./services/token.guard";
 const routes: Routes = [
   {
     path: "",
-    redirectTo: "",
     pathMatch: "full",
-    component: HomeComponent,
+    // component: HomeComponent,
+    loadChildren: () =>import('./pages/home/home.module').then(mod => mod.HomeModule),
     canActivate: [TokenGuard]
   },
   {
