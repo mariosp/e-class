@@ -9,7 +9,6 @@ const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
-    // component: HomeComponent,
     loadChildren: () =>import('./pages/home/home.module').then(mod => mod.HomeModule),
     canActivate: [TokenGuard]
   },

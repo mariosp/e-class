@@ -11,7 +11,7 @@ import {DialogComponent} from "../dialog/dialog.component";
 export class TeacherComponent implements OnInit {
   displayedColumns: string[] = ['Student','Grade', 'Timestamp', 'Submit'];
   dataSource = [];
-  title=''
+  title='';
   constructor(private apiService: ApiService,public dialog: MatDialog) { }
 
   async ngOnInit() {
@@ -26,8 +26,13 @@ export class TeacherComponent implements OnInit {
   }
 
   openDialog(data): void {
+    const typeOfSubmit = data.grade? 'Update' : 'Submit';
+    const student = data.user;
     const dialogRef = this.dialog.open(DialogComponent, {
-      width: '250px'
+      data: {
+        typeOfSubmit,
+        student
+      }
     });
 
     dialogRef.afterClosed().subscribe(async result => {

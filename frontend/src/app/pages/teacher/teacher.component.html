@@ -19,8 +19,8 @@
   </ng-container>
 
   <ng-container matColumnDef="Submit">
-    <th mat-header-cell *matHeaderCellDef> Submit Grade </th>
-    <td mat-cell *matCellDef="let element"><button mat-button color="primary" (click)="submitGrade(element)">Submit</button> </td>
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element"><button mat-button color="primary" (click)="submitGrade(element)">{{element.grade ?'Update':'Submit'}}</button> </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
