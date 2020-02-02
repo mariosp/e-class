@@ -7,6 +7,8 @@ router.get('/',checkAuthToken,  routePermission([userRoles.admin,userRoles.stude
 
 router.post('/create', checkAuthToken, routePermission([userRoles.admin]), userController.createUser);
 
+router.get('/getAllUsers', checkAuthToken, routePermission([userRoles.admin]), userController.getAllUsers);
+
 
 
 module.exports = router;

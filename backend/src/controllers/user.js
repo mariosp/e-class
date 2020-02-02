@@ -50,6 +50,7 @@ exports.deleteUser = (req, res) => {
     res.send('NOT IMPLEMENTED: deleteUser');
 };
 
-// exports.getAllUsers = (req, res) => {
-//     res.send('NOT IMPLEMENTED: deleteUser');
-// };
+exports.getAllUsers = async (req, res) => {
+    const users = await User.find({userRole: { $ne: userRoles.admin }}); //return all user except the admin account
+    users? res.send({status:1,data: users}) : res.send({status:0,msg: "Error getting all users"}) ;
+};
