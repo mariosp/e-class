@@ -1,0 +1,12 @@
+<div class="margin-outter list">
+      <app-card
+        *ngFor="let card of data;"
+        [header]="card.name"
+        [subtitle]="card.userRole"
+        [p1] ="card.email"
+        [studentId]="card.student"
+        [teacherId]="card.teacher"
+        [id]="card.id"
+        [cardButtons] = "cardButtons"
+      ></app-card>
+</div>

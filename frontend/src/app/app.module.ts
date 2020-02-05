@@ -11,27 +11,30 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {HomeModule} from "./pages/home/home.module";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    HttpClientModule,
-    FormsModule,
-    HomeModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: []
+    declarations: [
+        AppComponent,
+        LoginComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatSnackBarModule,
+        HttpClientModule,
+        FormsModule,
+        HomeModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
+    exports: [],
+    entryComponents: []
 })
 export class AppModule { }

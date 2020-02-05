@@ -1,11 +1,24 @@
-<h1 mat-dialog-title>{{this.data.typeOfSubmit}} Grade</h1>
-<div mat-dialog-content>
-  <p>Put the grade for the student {{this.data.student}}</p>
-  <mat-form-field>
-    <input matInput [(ngModel)]="grade">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="grade" cdkFocusInitial>Submit</button>
-</div>
+<ng-container [ngSwitch]="data.dialogType">
+  <ng-container *ngSwitchCase="'GradeDialog'">
+    <h1 mat-dialog-title>{{this.data.typeOfSubmit}} Grade</h1>
+    <div mat-dialog-content>
+      <p>Put the grade for the student {{this.data.student}}</p>
+      <mat-form-field>
+        <input matInput [(ngModel)]="grade">
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">Cancel</button>
+      <button mat-button [mat-dialog-close]="grade" cdkFocusInitial>Submit</button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'NotifyDialog'">
+    <div mat-dialog-actions>
+      <p>{{this.data?.msg}}</p>
+      <button mat-button (click)="onNoClick()">No</button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Yes</button>
+    </div>
+  </ng-container>
+
+</ng-container>

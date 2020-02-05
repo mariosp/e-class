@@ -39,5 +39,4 @@ export class HomeComponent implements OnInit {
     this.nav.navigate(['/login']);
 
   }
-
 }

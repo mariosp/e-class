@@ -1,0 +1,27 @@
+<app-top-bar [topBar]="topBar" *ngIf="topBar"></app-top-bar>
+
+<div class="margin-outter">
+  <form [formGroup]="profileForm" *ngIf="profileForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" formControlName="name">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="email" formControlName="email">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>User Role</mat-label>
+      <mat-select placeholder="User Role" formControlName="userRole" >
+        <mat-option value="student">student</mat-option>
+        <mat-option value="teacher">teacher</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" *ngIf="newAccount || edit">
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="New Password" formControlName="password">
+    </mat-form-field>
+    <button mat-button type="submit" color="primary" *ngIf="newAccount" [disabled]="!profileForm.valid" (click)="createNewUser()">Create New User</button>
+    <button mat-button type="submit" color="primary" *ngIf="edit" [disabled]="!profileForm.valid" (click)="editUser()">Submit edit</button>
+  </form>
+</div>

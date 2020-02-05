@@ -1,0 +1,14 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>{{header}}</mat-card-title>
+    <mat-card-subtitle>{{subtitle}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{p1}}</p>
+    <p *ngIf="teacherId">teacher ID: {{teacherId}}</p>
+    <p *ngIf="studentId">student ID: {{studentId}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button *ngFor="let button of cardButtons" (click)="button.action(id)">{{button.title}}</button>
+  </mat-card-actions>
+</mat-card>

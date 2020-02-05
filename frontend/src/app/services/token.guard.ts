@@ -12,6 +12,7 @@ export class TokenGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    console.log("TOKEN GUARD")
     if(localStorage.getItem("TOKEN")){
       const expired = new JwtHelperService().isTokenExpired(localStorage.getItem("TOKEN"));
       if(!expired) return true;

@@ -12,7 +12,9 @@ export class TeacherComponent implements OnInit {
   displayedColumns: string[] = ['Student','Grade', 'Timestamp', 'Submit'];
   dataSource = [];
   title='';
-  constructor(private apiService: ApiService,public dialog: MatDialog) { }
+  constructor(
+    private apiService: ApiService,
+    private dialog: MatDialog) { }
 
   async ngOnInit() {
     const result = await this.apiService.getTeacher().toPromise();
@@ -26,10 +28,12 @@ export class TeacherComponent implements OnInit {
   }
 
   openDialog(data): void {
+    const dialogType = "GradeDialog"
     const typeOfSubmit = data.grade? 'Update' : 'Submit';
     const student = data.user;
     const dialogRef = this.dialog.open(DialogComponent, {
       data: {
+        dialogType,
         typeOfSubmit,
         student
       }
@@ -41,10 +45,10 @@ export class TeacherComponent implements OnInit {
         grade: Number(result),
         student: data._id
       };
-      console.log(newSubmitGrade)
+      // console.log(newSubmitGrade)
         const updated = await this.apiService.submitGrade(newSubmitGrade).toPromise();
-        console.log(updated)
-
+        // console.log(updated)
+      this.ngOnInit();
     });
   }
 

@@ -16,11 +16,19 @@ import {MatTableModule} from "@angular/material/table";
 import {MatDialogModule} from "@angular/material/dialog";
 import {RouterModule, Routes} from "@angular/router";
 import {AccountsComponent} from "../admin/accounts/accounts.component";
+import {TopBarComponent} from "../../components/top-bar/top-bar.component";
+import {ListComponent} from "../../components/list/list.component";
+import {CardComponent} from "../../components/card/card.component";
+import {MatGridListModule} from "@angular/material/grid-list";
+import {TokenGuard} from "../../services/token.guard";
+import {UserComponent} from "../user/user.component";
+import {MatSelectModule} from "@angular/material/select";
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    canActivate: [TokenGuard],
     children:[
       {
         path:"accounts",
@@ -34,6 +42,26 @@ const routes: Routes = [
         path:"my-courses",
         component:StudentComponent
       },
+      {
+        path:"user",
+        component: UserComponent
+      },
+      {
+        path:"user/new",
+        component: UserComponent
+      },
+      {
+        path:"user/edit",
+        component: UserComponent
+      },
+      {
+        path:"user/:id",
+        component: UserComponent
+      },
+      {
+        path:"user/:id/edit",
+        component: UserComponent
+      },
     ]
   },
 ];
@@ -46,7 +74,11 @@ const routes: Routes = [
     TeacherComponent,
     DialogComponent,
     ToolbarButtonsComponent,
-    AccountsComponent
+    AccountsComponent,
+    TopBarComponent,
+    ListComponent,
+    CardComponent,
+    UserComponent
   ],
   imports: [
     CommonModule,
@@ -59,8 +91,11 @@ const routes: Routes = [
     MatToolbarModule,
     MatTableModule,
     MatDialogModule,
+    MatCardModule,
+    MatGridListModule,
     FormsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    MatSelectModule,
   ],
   entryComponents:[DialogComponent]
 })

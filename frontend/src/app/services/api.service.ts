@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
+import {User} from "../models/user";
 
 @Injectable({
   providedIn: 'root'
@@ -45,4 +46,31 @@ export class ApiService {
   submitGrade(data): Observable<any> {
     return this.http.post(`${environment.server}grade/add`,data, this.httpOptions);
   }
+
+  //User Api
+  //Get ALl User (admin)
+  getAllUsers(): Observable<any> {
+    return this.http.get(`${environment.server}user/getAllUsers`, this.httpOptions);
+  }
+
+  //Get User info (ALL USERS) users/ or  Get user info by id (Admin) /user/:id
+  getUser(userId = ""): Observable<any> {
+    return this.http.get(`${environment.server}user/${userId}`, this.httpOptions);
+  }
+
+  //Delete User (admin)
+  deleteUser(userId): Observable<any> {
+    return this.http.delete(`${environment.server}user/${userId}`, this.httpOptions);
+  }
+
+  //Get User info (ALL USERS) users/ or  Get user info by id (Admin) /user/:id
+  createUser(user:User): Observable<any> {
+    return this.http.post(`${environment.server}user/create`, user, this.httpOptions);
+  }
+
+  updateUser(userId = "", user): Observable<any> {
+    return this.http.patch(`${environment.server}user/${userId}`, user, this.httpOptions);
+  }
+
+  //----------//
 }

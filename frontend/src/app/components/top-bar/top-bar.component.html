@@ -1,0 +1,8 @@
+<div class="margin-outter">
+  <div class="top-bar">
+    <h2>{{topBar.title}}</h2>
+    <div class="buttons-container">
+      <button mat-button color="primary" *ngFor="let button of topBar.buttons" (click)="button.action()">{{button.title}}</button>
+    </div>
+  </div>
+</div>

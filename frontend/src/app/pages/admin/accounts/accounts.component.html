@@ -1,6 +1,5 @@
-<div class="margin-outter">
-  <div class="top-bar">
-    <h2>Accounts</h2>
-    <button mat-button color="primary">New User</button>
-  </div>
-</div>
+<app-top-bar [topBar]="topBar"></app-top-bar>
+<app-list
+  [data] ="this.list?.data"
+  [cardButtons]="this.list?.buttons"
+></app-list>
