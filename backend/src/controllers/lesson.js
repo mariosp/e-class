@@ -1,6 +1,43 @@
 const {User, Student, Teacher, Lesson} = require("../models");
 const {userRoles} = require("../services/user.service");
 
+
+
+/*
+ getAllLessons ADMIN
+ Get All Lessons
+*/
+exports.getAllLessons = async (req, res) => {
+    try {
+        const lessons = await Lesson.find({}).populate({
+            path: 'enrolledStudents',
+            select: 'user',
+            populate: {path: 'user', select: 'name'}
+        }).populate({
+            path: 'teacher',
+            select: 'user',
+            populate: {path: 'user', select: 'name'}
+        });
+
+
+
+        const courses = lessons.map(lesson=>{
+            const lessonObj = {
+                name: lesson.title,
+                id: lesson._id,
+                teacherName: lesson.teacher.user.name,
+                teacherId: lesson.teacher._id,
+                enrolledStudents: lesson.enrolledStudents
+            }
+            return lessonObj;
+        });
+
+
+        return lessons? res.send({status:1,data:courses}) : res.send({status:0,msg:"No courses found"})
+    }catch (e) {
+        res.send({status:0,msg:"Error getting courses"});
+    }
+};
 /*
  createLesson ADMIN
  Creates a new lesson
@@ -19,11 +56,11 @@ exports.createLesson = async (req, res) => {
             if(lesson) {
                 lesson.save();
                 await Teacher.findByIdAndUpdate({_id: teacher}, {lesson: lesson._id});
-                res.send({status:1,msg:"Lesson Created"});
+                return res.send({status:1,msg:"Lesson Created"});
             }
         } catch (e) {
             console.log(e);
-            res.status(500).send({status:1, msg:"error creating Lesson"});
+            return res.status(500).send({status:1, msg:"error creating Lesson"});
         }
         res.send({status:1, msg: "Lesson created",data:lesson});
     } else {

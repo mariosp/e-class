@@ -73,4 +73,21 @@ export class ApiService {
   }
 
   //----------//
+
+  //Lesson Api
+
+  getAllLessons(): Observable<any>{
+    return this.http.get(`${environment.server}lesson/getAllLessons`, this.httpOptions);
+  }
+
+  createLesson(data): Observable<any>{
+    return this.http.post(`${environment.server}lesson/create`, data, this.httpOptions);
+  }
+
+  //---------//
+
+  //Teacher
+  getTeachersWithoutLesson(): Observable<any>{
+    return this.http.get(`${environment.server}teacher/getTeachersWithoutLesson`, this.httpOptions);
+  }
 }

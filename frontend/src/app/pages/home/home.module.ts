@@ -23,6 +23,50 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import {TokenGuard} from "../../services/token.guard";
 import {UserComponent} from "../user/user.component";
 import {MatSelectModule} from "@angular/material/select";
+import {CoursesComponent} from "../admin/courses/courses.component";
+import { MatExpansionModule} from "@angular/material/expansion";
+
+// const routes: Routes = [
+//   {
+//     path: '',
+//     component: HomeComponent,
+//     canActivate: [TokenGuard],
+//     children:[
+//       {
+//         path:"my-lesson",
+//         component:TeacherComponent,
+//       },
+//       {
+//         path:"my-courses",
+//         component:StudentComponent
+//       },
+//       {
+//         path:"accounts",
+//         component:AccountsComponent
+//       },
+//       {
+//         path:"user",
+//         component: UserComponent
+//       },
+//       {
+//         path:"user/new",
+//         component: UserComponent
+//       },
+//       {
+//         path:"user/edit",
+//         component: UserComponent
+//       },
+//       {
+//         path:"user/:id",
+//         component: UserComponent
+//       },
+//       {
+//         path:"user/:id/edit",
+//         component: UserComponent
+//       },
+//     ]
+//   },
+// ];
 
 const routes: Routes = [
   {
@@ -31,16 +75,16 @@ const routes: Routes = [
     canActivate: [TokenGuard],
     children:[
       {
-        path:"accounts",
-        component:AccountsComponent
-      },
-      {
         path:"my-lesson",
         component:TeacherComponent,
       },
       {
         path:"my-courses",
         component:StudentComponent
+      },
+      {
+        path:"accounts",
+        component:AccountsComponent
       },
       {
         path:"user",
@@ -62,6 +106,10 @@ const routes: Routes = [
         path:"user/:id/edit",
         component: UserComponent
       },
+      {
+        path:"courses",
+        component: CoursesComponent
+      },
     ]
   },
 ];
@@ -78,7 +126,8 @@ const routes: Routes = [
     TopBarComponent,
     ListComponent,
     CardComponent,
-    UserComponent
+    UserComponent,
+    CoursesComponent
   ],
   imports: [
     CommonModule,
@@ -96,6 +145,7 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forChild(routes),
     MatSelectModule,
+    MatExpansionModule
   ],
   entryComponents:[DialogComponent]
 })

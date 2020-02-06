@@ -4,9 +4,11 @@
         [header]="card.name"
         [subtitle]="card.userRole"
         [p1] ="card.email"
+        [p2] ="card?.teacherName"
         [studentId]="card.student"
-        [teacherId]="card.teacher"
+        [teacherId]="card.teacher || card?.teacherId"
         [id]="card.id"
+        [enrolledStudents]="card?.enrolledStudents"
         [cardButtons] = "cardButtons"
       ></app-card>
 </div>

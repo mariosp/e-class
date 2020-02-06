@@ -20,7 +20,6 @@ export class AccountsComponent implements OnInit {
   constructor(private apiService: ApiService, private dialog: MatDialog, private nav: Router) { }
 
   ngOnInit() {
-    console.log(this.dialog)
     this.topBar={
       title: "Accounts",
       buttons: [
@@ -30,7 +29,7 @@ export class AccountsComponent implements OnInit {
         }
       ]
     };
-    
+
     this.listButtons = [
       {
         title: "edit",

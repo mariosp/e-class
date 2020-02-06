@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from "../../models/user";
 import {ButtonItem} from "../../models/top-bar";
+import {Lesson} from "../../models/lesson";
 
 @Component({
   selector: 'app-list',
@@ -8,7 +9,7 @@ import {ButtonItem} from "../../models/top-bar";
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  @Input() data: User[];
+  @Input() data;
   @Input() cardButtons: ButtonItem[];
 
   constructor() { }

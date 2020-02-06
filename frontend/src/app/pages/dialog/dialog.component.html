@@ -21,4 +21,28 @@
     </div>
   </ng-container>
 
+  <ng-container *ngSwitchCase="'CourseNewDialog'">
+      <h2 mat-dialog-title>{{this.data?.msg}}</h2>
+
+    <div mat-dialog-content>
+      <mat-form-field>
+        <input matInput placeholder="Course title" #inputCourseTitle>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-content>
+      <mat-select placeholder="Teacher" #inputAvailableTeacher>
+        <mat-option *ngFor="let teacher of data.availableTeachers" [value]="teacher._id">
+          {{teacher.user.name}}
+        </mat-option>
+      </mat-select>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">Cancel</button>
+      <button mat-button [mat-dialog-close]="{title:inputCourseTitle.value, teacher:inputAvailableTeacherrs.value}"
+              cdkFocusInitial [disabled]="!inputCourseTitle.value || !inputAvailableTeacher.value">
+        Submit
+      </button>
+    </div>
+  </ng-container>
+
 </ng-container>

@@ -68,3 +68,15 @@ exports.getTeacherLesson = async (req, res) => {
     }
 
 };
+
+exports.getTeachersWithoutLesson = async (req, res)=>{
+    try {
+        const teachers = await Teacher.find({lesson: {$exists: false}}).populate({
+            path: 'user',
+            select: 'name'
+        });
+       return teachers?  res.send({status:1,data:teachers}) :  res.send({status:0,msg:"Not found"})
+    }catch (e) {
+        res.send({status:0,msg:"Error"})
+    }
+};

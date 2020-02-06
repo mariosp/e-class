@@ -19,9 +19,9 @@
     </mat-form-field>
     <mat-form-field appearance="outline" *ngIf="newAccount || edit">
       <mat-label>Password</mat-label>
-      <input matInput placeholder="New Password" formControlName="password">
+      <input matInput placeholder="New Password" type="password" formControlName="password">
     </mat-form-field>
-    <button mat-button type="submit" color="primary" *ngIf="newAccount" [disabled]="!profileForm.valid" (click)="createNewUser()">Create New User</button>
-    <button mat-button type="submit" color="primary" *ngIf="edit" [disabled]="!profileForm.valid" (click)="editUser()">Submit edit</button>
+    <button mat-stroked-button  color="primary" *ngIf="newAccount" [disabled]="!profileForm.valid" (click)="createNewUser()">Create New User</button>
+    <button mat-stroked-button  color="primary" *ngIf="edit" [disabled]="!profileForm.valid" (click)="editUser()">Submit edit</button>
   </form>
 </div>
