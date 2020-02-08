@@ -75,7 +75,7 @@ exports.getTeachersWithoutLesson = async (req, res)=>{
             path: 'user',
             select: 'name'
         });
-       return teachers?  res.send({status:1,data:teachers}) :  res.send({status:0,msg:"Not found"})
+       return teachers?  res.send({status:1,data:teachers}) :  res.send({status:1,msg:"No available teachers"})
     }catch (e) {
         res.send({status:0,msg:"Error"})
     }

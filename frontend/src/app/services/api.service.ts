@@ -84,10 +84,22 @@ export class ApiService {
     return this.http.post(`${environment.server}lesson/create`, data, this.httpOptions);
   }
 
+  enrollToLesson(data): Observable<any>{
+    return this.http.post(`${environment.server}lesson/enroll`, data, this.httpOptions);
+  }
+
   //---------//
 
   //Teacher
   getTeachersWithoutLesson(): Observable<any>{
     return this.http.get(`${environment.server}teacher/getTeachersWithoutLesson`, this.httpOptions);
   }
+
+  //---------//
+
+  //Student
+  getNotEnrolledStudents(lessonId): Observable<any>{
+    return this.http.get(`${environment.server}student/getNotenrolledStudents/${lessonId}`, this.httpOptions);
+  }
+
 }
