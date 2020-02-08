@@ -34,3 +34,17 @@ exports.getAllEnrolledLessons = async (req, res) => {
     }
 
 };
+
+exports.getNotEnrolledStudents = async (req, res) => {
+    try {
+        const lessonId = req.params.lessonId;
+        const {enrolledStudents} = await Lesson.findById(lessonId);
+        const notEnrolledStudents = await Student.find({_id: {$nin: enrolledStudents}}).populate({
+            path: 'user',
+            select: 'name -_id'
+        }).select(['-courses']);
+        return notEnrolledStudents? res.send({status:1, data: notEnrolledStudents}) : res.send({status:1, msg: "No student found"})
+    }catch (e) {
+        return res.send({status:0, msg: "Error getting not enrolled students"});
+    }
+};

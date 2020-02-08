@@ -1,0 +1,13 @@
+.margin-outter{
+  margin: 20px 20px;
+}
+
+.list{
+  display: flex;
+  //height: 100%;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  app-card{
+    margin: 10px;
+  }
+}

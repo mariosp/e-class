@@ -14,6 +14,17 @@ exports.getUser = (req, res) => {
 };
 
 /*
+ getUserById Admin
+ Return user's info
+*/
+exports.getUserById = async (req, res) => {
+    const user = await User.findById(req.params.userId).catch(e=>console.log(e))
+    user?
+        res.send({status:1,data: user}) :
+        res.status(400).send({status:0,msg: "error getting the User"});
+};
+
+/*
  createUser ADMIN
  Create a new user
 */
@@ -38,18 +49,57 @@ exports.createUser = async (req, res) => {
         res.send({status:1,msg:`User ${user.name} created`});
     } catch (e) {
       console.log(e);
-      res.status(500).send({errors:"Error creating user"});
+      res.status(400).send({status:0, msg:"Error creating user"});
     }
 };
 
-exports.updateUser = (req, res) => {
-    res.send('NOT IMPLEMENTED: updateUser');
+exports.updateUser = async (req, res) => {
+    try {
+        const userUpdateData = req.body;
+        const user = await User.findById(req.user.id);
+        user.name = userUpdateData.name;
+        user.email = userUpdateData.email;
+        if (userUpdateData.password) user.password = await hashPassword(userUpdateData.password); // will update password only if password field is not empty
+        await user.save();
+        res.send({status: 1, msg: "Your profile has been updated"});
+    } catch (e) {
+        res.status(400).send({status: 0, msg: "Error updating your info"});
+    }
 };
 
-exports.deleteUser = (req, res) => {
-    res.send('NOT IMPLEMENTED: deleteUser');
+/*
+ updateUserById ADMIN
+ update user profile
+*/
+exports.updateUserById = async (req, res) => {
+    try {
+        const userUpdateData = req.body;
+        const user = await User.findById(req.params.userId);
+        user.name = userUpdateData.name;
+        user.email = userUpdateData.email;
+        if (userUpdateData.password) user.password = await hashPassword(userUpdateData.password); // will update password only if password field is not empty
+        await user.save();
+        res.send({status: 1, msg: "User profile has been updated"});
+    } catch (e) {
+        res.status(400).send({status: 0, msg: "Error updating user"});
+    }
 };
 
-// exports.getAllUsers = (req, res) => {
-//     res.send('NOT IMPLEMENTED: deleteUser');
-// };
+exports.deleteUser = async (req, res) => {
+    try {
+        const deletedUser = await User.findById(req.params.userId);
+        if(deletedUser.userRole === userRoles.student) {
+            await deletedUser.deleteOne();
+            res.send({status: 1, msg: "User deleted successfully"});
+        }else {
+            res.send({status: 0, msg: "User is not a student"});
+        }
+    }catch (e) {
+        res.send({status:0, msg:"error deleting user"});
+    }
+};
+
+exports.getAllUsers = async (req, res) => {
+    const users = await User.find({userRole: { $ne: userRoles.admin }}); //return all user except the admin account
+    users? res.send({status:1,data: users}) : res.send({status:0,msg: "Error getting all users"}) ;
+};

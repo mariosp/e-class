@@ -1,11 +1,67 @@
-<h1 mat-dialog-title>Submit Grade</h1>
-<div mat-dialog-content>
-  <p>Put the grade for the student</p>
-  <mat-form-field>
-    <input matInput [(ngModel)]="grade">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="grade" cdkFocusInitial>Submit</button>
-</div>
+<ng-container [ngSwitch]="data.dialogType">
+  <ng-container *ngSwitchCase="'GradeDialog'">
+    <h1 mat-dialog-title>{{this.data.typeOfSubmit}} Grade</h1>
+    <div mat-dialog-content>
+      <p>Put the grade for the student {{this.data.student}}</p>
+      <mat-form-field>
+        <input matInput [(ngModel)]="grade">
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">Cancel</button>
+      <button mat-button [mat-dialog-close]="grade" cdkFocusInitial>Submit</button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'NotifyDialog'">
+    <div mat-dialog-actions>
+      <p>{{this.data?.msg}}</p>
+      <button mat-button (click)="onNoClick()">No</button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Yes</button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'CourseNewDialog'">
+      <h2 mat-dialog-title>{{this.data?.msg}}</h2>
+
+    <div mat-dialog-content>
+      <mat-form-field>
+        <input matInput placeholder="Course title" #inputCourseTitle>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-content>
+      <mat-select placeholder="Teacher" #inputAvailableTeachers>
+        <mat-option *ngFor="let teacher of data.availableTeachers" [value]="teacher._id">
+          {{teacher.user.name}}
+        </mat-option>
+      </mat-select>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">Cancel</button>
+      <button mat-button [mat-dialog-close]="{title:inputCourseTitle.value, teacher:inputAvailableTeachers.value}"
+              cdkFocusInitial [disabled]="!inputCourseTitle.value || !inputAvailableTeachers.value">
+        Submit
+      </button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'AssignToStudentDialog'">
+    <h2 mat-dialog-title>{{this.data?.msg}}</h2>
+
+    <div mat-dialog-content>
+      <mat-select multiple placeholder="Students" #inputSelectedStudents>
+        <mat-option *ngFor="let student of data.notEnrolledStudents" [value]="student._id">
+          {{student.user.name}}
+        </mat-option>
+      </mat-select>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">Cancel</button>
+      <button mat-button [mat-dialog-close]="{students:inputSelectedStudents.value}"
+              cdkFocusInitial [disabled]="!inputSelectedStudents.value">
+        Submit
+      </button>
+    </div>
+  </ng-container>
+
+</ng-container>

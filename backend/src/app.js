@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(cors());
 app.options('*', cors());
 
-app.use(express.static(path.join(__dirname,"../../frontend/dist/frontend/")));
+app.use(express.static(path.join(__dirname,"../../frontend/dist/frontend/"))); //Serve static files (front end app)
 app.use(routes); //app api
 app.use(databasefakerroutes); // api to generate admin and db data
 
