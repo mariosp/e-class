@@ -7,12 +7,18 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "installserver": "cd backend && npm i ",
     "installclient": "cd frontend && npm i ",
-    "server": "cd backend && npm run dev",
-    "client": "cd frontend && npm start"
+    "server": "cd backend && npm run start",
+    "client": "cd frontend && npm start",
+    "start": "cd backend && node src/app.js",
+    "postinstall": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend "
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mariosp/eclass-nodejs.git"
+  },
+  "engines": {
+    "node": "12.14.1",
+    "npm": "6.13.4"
   },
   "keywords": [],
   "author": "",
