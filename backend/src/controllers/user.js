@@ -86,12 +86,17 @@ exports.updateUserById = async (req, res) => {
 };
 
 exports.deleteUser = async (req, res) => {
-    // const user = await User.findById(req.params.userId).catch(e=>console.log(e));
-    // user.delete();
-    // if(user.userRole === userRoles.student){
-    //
-    // }
-    res.send("Not implemented yet");
+    try {
+        const deletedUser = await User.findById(req.params.userId);
+        if(deletedUser.userRole === userRoles.student) {
+            await deletedUser.deleteOne();
+            res.send({status: 1, msg: "User deleted successfully"});
+        }else {
+            res.send({status: 0, msg: "User is not a student"});
+        }
+    }catch (e) {
+        res.send({status:0, msg:"error deleting user"});
+    }
 };
 
 exports.getAllUsers = async (req, res) => {

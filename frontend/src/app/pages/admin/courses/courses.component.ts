@@ -52,7 +52,6 @@ export class CoursesComponent implements OnInit {
     ];
 
     this.apiService.getAllLessons().subscribe((res) => {
-      console.log(res)
       res.status ? (this.list = {data: res.data, buttons: this.listButtons}) : new Error(res.msg);
     })
 

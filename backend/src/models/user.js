@@ -1,4 +1,6 @@
 const mongoose= require('mongoose');
+const {userRoles} = require('../services/user.service')
+
 const userSchema= mongoose.Schema({
     name: {
         type: String,
@@ -55,5 +57,15 @@ userSchema.methods.toJSON = function() {
     delete obj._id;
     return obj;
 };
+
+userSchema.pre('deleteOne',{ document: true, query: false }, async function() {
+    const user = this;
+    if(user.userRole === userRoles.student){
+        const student = await user.model('Student').findById(user.student);
+        student.deleteOne();
+    }
+});
+
+
 
 module.exports= mongoose.model('User',userSchema);

@@ -6,6 +6,7 @@ import {User} from "../../../models/user";
 import {DialogComponent} from "../../dialog/dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {Router} from "@angular/router";
+import {SnackBarService} from "../../../services/snack-bar.service";
 
 
 @Component({
@@ -17,7 +18,10 @@ export class AccountsComponent implements OnInit {
   topBar: TopBar;
   list: List;
   listButtons: ButtonItem[];
-  constructor(private apiService: ApiService, private dialog: MatDialog, private nav: Router) { }
+  constructor(private apiService: ApiService,
+              private dialog: MatDialog,
+              private nav: Router,
+              private snackBar: SnackBarService) { }
 
   ngOnInit() {
     this.topBar={
@@ -35,10 +39,10 @@ export class AccountsComponent implements OnInit {
         title: "edit",
         action:(userId)=> this.editUser(this.nav, userId)
       },
-      // {
-      //   title: "delete",
-      //   action: (userId)=> this.deleteUser(this.dialog, userId)
-      // }
+      {
+        title: "delete",
+        action: (userId)=> this.deleteUser(this.dialog, userId)
+      }
     ];
 
     this.apiService.getAllUsers().subscribe((res)=>{
@@ -71,7 +75,13 @@ export class AccountsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async result => {
       if(!result) return;
       this.apiService.deleteUser(userId).subscribe(res=>{
-        this.ngOnInit();
+        if(res.status) {
+          this.snackBar.messageSuccess(res.msg);
+          this.ngOnInit();
+        }else {
+          this.snackBar.messageSuccess(res.msg);
+          this.ngOnInit();
+        }
       })
     });
   }
