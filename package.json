@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "installserver": "cd backend && npm i ",
     "installclient": "cd frontend && npm i ",
-    "server": "cd backend && npm run start",
+    "server": "cd backend && npm run dev",
     "client": "cd frontend && npm start",
     "start": "cd backend && node src/app.js",
     "postinstall": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend "
