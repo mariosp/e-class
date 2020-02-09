@@ -18,6 +18,8 @@ These instructions will get you a copy of the project up and running on your loc
 ### API collection
 You can find the relative collection on postman
 
+[Postman Collection Web](https://documenter.getpostman.com/view/7448955/SWTHbFc4)
+
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/0bf0af29d80e0300c45a)
 
 ### Installation and running
@@ -41,7 +43,7 @@ Generate Admin (GET)
 (optional)
 Login User (GET) using the Admin's credentials
 
- (optional) Generate Data (GET) using Admin's JWT token (Bearer auth)
+(optional) Generate Data (GET) using Admin's JWT token (Bearer auth)
 
 
 
