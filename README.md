@@ -16,7 +16,7 @@ These instructions will get you a copy of the project up and running on your loc
 > You need to have MongoDB and Nodejs installed to run the project locally
 
 ### API collection
-You can find the relative collection on postman
+You can find the related collection on postman
 
 [Postman Collection Web](https://documenter.getpostman.com/view/7448955/SWTHbFc4)
 
