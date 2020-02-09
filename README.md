@@ -94,13 +94,6 @@ License
 ----
 MIT
 
-![login-screen](https://user-images.githubusercontent.com/3619970/74102969-dcaccb00-4b50-11ea-9a2f-1c8a2acf871f.PNG)
-![admin-accounts](https://user-images.githubusercontent.com/3619970/74102971-dfa7bb80-4b50-11ea-9272-0e96524af22f.PNG)
-![edit-account](https://user-images.githubusercontent.com/3619970/74102974-e20a1580-4b50-11ea-95c8-541296ea487c.PNG)
-![courses](https://user-images.githubusercontent.com/3619970/74102976-e46c6f80-4b50-11ea-8187-2ac5af005ab5.PNG)
-![teacher](https://user-images.githubusercontent.com/3619970/74102977-e6363300-4b50-11ea-89be-b0c606aca95a.PNG)
-![student](https://user-images.githubusercontent.com/3619970/74102978-ea625080-4b50-11ea-828a-a6a8ae364a49.PNG)
-
 
 
 
